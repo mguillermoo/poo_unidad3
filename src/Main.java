@@ -32,7 +32,18 @@ public class Main {
                 return;
         }
 
+        List<Equipo> equipos = new ArrayList<>();
+        for (int i = 1; i <= numEquipos; i++) {
+            System.out.print("Ingrese el nombre del equipo " + i + ": ");
+            String nombre = scanner.nextLine();
+            equipos.add(new Equipo(nombre));
+        }
 
+        SorteoLiga sorteo = new SorteoLiga(equipos);
+        sorteo.realizarSorteo();
+        System.out.println("\nEnfrentamientos sorteados:");
+        sorteo.mostrarPartidos();
+        scanner.close();
 
     }
 }
