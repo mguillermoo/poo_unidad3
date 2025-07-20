@@ -1,6 +1,21 @@
 import java.util.*;
 
 public class SorteoLiga {
+    // Guarda los partidos en formato texto plano, cada enfrentamiento en una línea
+    public void guardarPartidosComoTexto(String archivo) throws java.io.IOException {
+        try (java.io.PrintWriter writer = new java.io.PrintWriter(new java.io.FileWriter(archivo))) {
+            for (int i = 0; i < partidos.size(); i++) {
+                writer.println("Partido " + (i + 1) + ": " + partidos.get(i).mostrar());
+            }
+        }
+    }
+    // Método para serializar y guardar la lista de partidos en un archivo
+    public void guardarPartidos(String archivo) throws java.io.IOException {
+        // Serializa la lista de partidos usando ObjectOutputStream
+        try (java.io.ObjectOutputStream out = new java.io.ObjectOutputStream(new java.io.FileOutputStream(archivo))) {
+            out.writeObject(partidos);
+        }
+    }
 
     private List<Equipo> equipos;
     private List<Partido> partidos;

@@ -1,5 +1,6 @@
 
-public class Partido {
+// Implementa Serializable para permitir la serialización de instancias
+public class Partido implements java.io.Serializable {
 
     private Equipo equipoA;
     private Equipo equipoB;

@@ -1,5 +1,6 @@
 // Clase que representa un equipo de fútbol
-public class Equipo {
+// Implementa Serializable para permitir la serialización de instancias
+public class Equipo implements java.io.Serializable {
 
     private String nombre;
 

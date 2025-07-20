@@ -33,16 +33,33 @@ public class Main {
         }
 
         List<Equipo> equipos = new ArrayList<>();
+        // Se agregan los equipos, lanzando excepción si el nombre está vacío
         for (int i = 1; i <= numEquipos; i++) {
             System.out.print("Ingrese el nombre del equipo " + i + ": ");
             String nombre = scanner.nextLine();
-            equipos.add(new Equipo(nombre));
+            try {
+                if (nombre.trim().isEmpty()) {
+                    throw new EquipoException("El nombre del equipo no puede estar vacío.");
+                }
+                equipos.add(new Equipo(nombre));
+            } catch (EquipoException ex) {
+                System.out.println("Error: " + ex.getMessage());
+                i--; // Repite el ciclo para el mismo equipo
+            }
         }
 
         SorteoLiga sorteo = new SorteoLiga(equipos);
         sorteo.realizarSorteo();
         System.out.println("\nEnfrentamientos sorteados:");
         sorteo.mostrarPartidos();
+
+        // Serializa los partidos generados y los guarda en un archivo
+        try {
+            sorteo.guardarPartidos("partidos.ser");
+            System.out.println("Partidos guardados en partidos.ser");
+        } catch (Exception e) {
+            System.out.println("Error al guardar los partidos: " + e.getMessage());
+        }
         scanner.close();
 
     }
